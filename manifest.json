@@ -6,7 +6,7 @@
     "name": "markdown-support",
     "logo": "/logo.png",
     "keywords": [
-        "md"
+        "markdown", "md"
     ],
     "devTools": false,
     "preview": {

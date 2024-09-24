@@ -2,123 +2,70 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>QuillJS Markdown Editor</title>
-    <link href="../css/quill.snow.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/quilljs-markdown-common-style.css" />
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        height: 100%;
-        background-color: #ffffff;
-      }
-      #editor {
-        height: 90vh;
-        padding: 5vh 5vw;
-        background-color: #ffffff;
-        border: 1px solid #ccc;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        overflow-y: auto;
-      }
-      #edit-button {
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        padding: 10px 20px;
-        font-size: 16px;
-        color: white;
-        background-color: #007bff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    </style>
+    <title>Markdown Viewer/Editor</title>
+    <!-- CSS for SimpleMDE -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const head = document.head;
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.onerror = function() {
+          this.href = eagle.app.isDarkColors() ? 'simplemde.dark.min.css' : 'simplemde.min.css';
+        };
+        link.href = eagle.app.isDarkColors() ? 'simplemde.dark.min.css' : 'simplemde.min.css';
+        head.appendChild(link);
+      });
+    </script>
   </head>
   <body>
-    <div id="editor"></div>
-    <button id="edit-button" onclick="confirmEdit()">Edit</button>
+    <textarea id="editor"></textarea>
 
-    <script src="../js/quill.min.js"></script>
-    <script src="../js/quilljs-markdown.js"></script>
-    <script src="../js/markdown-it.min.js"></script>
-    <script src="../js/turndown.js"></script>
+    <!-- JS for SimpleMDE -->
+    <script
+      src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
+      onerror="this.src='simplemde.min.js'"
+    ></script>
+
     <script>
-      const turndownService = new TurndownService({
-        //using markdown syntax
-        headingStyle: "atx",
-        codeBlockStyle: "fenced",
-        emDelimiter: "*",
-        bulletListMarker: "-",
-        strongDelimiter: "**",
-        linkStyle: "inlined",
-        linkReferenceStyle: "full",
-        hr: "---",
-      });
-
       document.addEventListener("DOMContentLoaded", () => {
+        
         const urlParams = new URLSearchParams(window.location.search);
         const filePath = urlParams.get("path");
-        const markdownIt = new markdownit();
+          
+        if (!filePath) {
+          console.error("File path not provided in URL parameters.");
+          return;
+        }
+
         fetch(filePath)
-          .then((response) => response.text())
-          .then((text) => {
-            document.getElementById("editor").innerHTML =
-              markdownIt.render(text);
-          })
-          .catch((error) =>
-            console.error("Error loading the markdown file:", error)
-          );
-
-        document
-          .getElementById("edit-button")
-          .addEventListener("click", function () {
-            if (
-              !confirm(
-                "Warning: Currently, codeblock conversion may lead to a bug. Do you want to proceed with editing?"
-              )
-            ) {
-              return;
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Network response was not ok: ${response.statusText}`
+              );
             }
-
-            const quill = new Quill("#editor", {
-              modules: {
-                toolbar: [
-                  [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                  ["bold", "italic", "underline", "strike"],
-                  ["blockquote", "code-block"],
-                  [{ list: "ordered" }, { list: "bullet" }],
-                  [{ indent: "-1" }, { indent: "+1" }],
-                  [{ align: [] }],
-                  ["link", "image"],
-                  ["clean"],
-                ],
-              },
-              theme: "snow",
+            return response.text();
+          })
+          .then((text) => {
+            const simplemde = new SimpleMDE({
+              element: document.getElementById("editor"),
             });
+            simplemde.value(text);
 
-            // add autosave on change
-            quill.on("editor-change", function (eventName, ...args) {
-              if (eventName === "text-change") {
-                const fs = require("fs");
-                const htmlcontent = quill.root.innerHTML;
-                markdowncontent = turndownService.turndown(htmlcontent);
-                //! WARN still contain errors, need time to fix
-                fs.writeFile(filePath, markdowncontent, function (err) {
-                  if (err) {
-                    console.error("Error writing file:", err);
-                  }
-                });
-              }
+            // Add autosave on change
+            simplemde.codemirror.on("change", function () {
+              const fs = require("fs");
+              const markdowncontent = simplemde.value();
+              //! WARN still contain errors, need time to fix
+              fs.writeFile(filePath, markdowncontent, function (err) {
+                if (err) {
+                  console.error("Error writing file:", err);
+                }
+              });
             });
-
-            // hide edit button
-            document.getElementById("edit-button").style.display = "none";
-
-            // Initialize QuillMarkdown plugin
-            const quillMarkdown = new QuillMarkdown(quill);
-            quill.root.innerHTML = text;
+          })
+          .catch((error) => {
+            console.error("Error loading the markdown file:", error);
           });
       });
     </script>
