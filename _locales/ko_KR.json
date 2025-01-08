@@ -1,0 +1,10 @@
+{
+	"manifest": {
+		"app": {
+			"name": "Markdown 지원"
+		}
+	},
+	"app": {
+		"title": "Markdown 뷰어/에디터"
+	}
+}

@@ -1,73 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Markdown Viewer/Editor</title>
-    <!-- CSS for SimpleMDE -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const head = document.head;
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.onerror = function() {
-          this.href = eagle.app.isDarkColors() ? 'simplemde.dark.min.css' : 'simplemde.min.css';
-        };
-        link.href = eagle.app.isDarkColors() ? 'simplemde.dark.min.css' : 'simplemde.min.css';
-        head.appendChild(link);
-      });
-    </script>
-  </head>
-  <body>
+	<head>
+		<meta charset="UTF-8" />
+		<script src="app.js"></script>
+	</head>
+	<body>
+		<link rel="stylesheet" id="simplemde-css" href="simplemde.min.css">
     <textarea id="editor"></textarea>
-
-    <!-- JS for SimpleMDE -->
-    <script
-      src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
-      onerror="this.src='simplemde.min.js'"
-    ></script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        const filePath = urlParams.get("path");
-          
-        if (!filePath) {
-          console.error("File path not provided in URL parameters.");
-          return;
-        }
-
-        fetch(filePath)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(
-                `Network response was not ok: ${response.statusText}`
-              );
-            }
-            return response.text();
-          })
-          .then((text) => {
-            const simplemde = new SimpleMDE({
-              element: document.getElementById("editor"),
-            });
-            simplemde.value(text);
-
-            // Add autosave on change
-            simplemde.codemirror.on("change", function () {
-              const fs = require("fs");
-              const markdowncontent = simplemde.value();
-              //! WARN still contain errors, need time to fix
-              fs.writeFile(filePath, markdowncontent, function (err) {
-                if (err) {
-                  console.error("Error writing file:", err);
-                }
-              });
-            });
-          })
-          .catch((error) => {
-            console.error("Error loading the markdown file:", error);
-          });
-      });
-    </script>
-  </body>
+    <script src="simplemde.min.js"></script>
+	</body>
 </html>

@@ -1,0 +1,10 @@
+{
+	"manifest": {
+		"app": {
+			"name": "Markdown-Unterstützung"
+		}
+	},
+	"app": {
+		"title": "Markdown Betrachter/Editor"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"manifest": {
+		"app": {
+			"name": "Поддержка Markdown"
+		}
+	},
+	"app": {
+		"title": "Просмотрщик/Редактор Markdown"
+	}
+}

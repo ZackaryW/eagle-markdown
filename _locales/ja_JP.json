@@ -1,0 +1,10 @@
+{
+	"manifest": {
+		"app": {
+			"name": "Markdown サポート"
+		}
+	},
+	"app": {
+		"title": "Markdown ビューア/エディタ"
+	}
+}
