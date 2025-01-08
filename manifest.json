@@ -8,6 +8,8 @@
     "keywords": [
         "markdown", "md"
     ],
+    "fallbackLanguage": "en",
+	"languages": ["en", "zh_TW", "zh_CN", "ja_JP", "es_ES", "ru_RU", "de_DE", "ko_KR"],
     "devTools": true,
     "preview": {
         "md": {
