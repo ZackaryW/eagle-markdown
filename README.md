@@ -2,8 +2,8 @@
 
 A markdown extension for [Eagle](https://eagle.cool/) that provides a clean Markdown editor with theme support.
 
-![Light Theme](docs-assets/light-theme.png)
-![Dark Theme](docs-assets/dark-theme.png)
+![Light Theme](docs-asset/light.png)
+![Dark Theme](docs-asset/dark.png)
 
 ## Features
 
