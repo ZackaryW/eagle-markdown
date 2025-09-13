@@ -5,6 +5,13 @@
 		}
 	},
 	"app": {
-		"title": "Markdown 뷰어/에디터"
+		"title": "Markdown 뷰어/에디터",
+		"loading": "로딩 중...",
+		"darkMode": "다크 모드",
+		"lightMode": "라이트 모드",
+		"showPreview": "미리보기 표시",
+		"showEditor": "에디터 표시",
+		"showSideBySide": "나란히 표시",
+		"hidePreview": "미리보기 숨기기"
 	}
 }

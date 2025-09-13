@@ -5,6 +5,13 @@
 		}
 	},
 	"app": {
-		"title": "Markdown Viewer/Editor"
+		"title": "Markdown Viewer/Editor",
+		"loading": "Loading...",
+		"darkMode": "Dark Mode",
+		"lightMode": "Light Mode",
+		"showPreview": "Show Preview",
+		"showEditor": "Show Editor",
+		"showSideBySide": "Show Side-by-Side",
+		"hidePreview": "Hide Preview"
 	}
 }

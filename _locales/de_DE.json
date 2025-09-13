@@ -5,6 +5,13 @@
 		}
 	},
 	"app": {
-		"title": "Markdown Betrachter/Editor"
+		"title": "Markdown Betrachter/Editor",
+		"loading": "Lädt...",
+		"darkMode": "Dunkler Modus",
+		"lightMode": "Heller Modus",
+		"showPreview": "Vorschau anzeigen",
+		"showEditor": "Editor anzeigen",
+		"showSideBySide": "Seite an Seite anzeigen",
+		"hidePreview": "Vorschau ausblenden"
 	}
 }
