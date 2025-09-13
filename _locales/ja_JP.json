@@ -5,6 +5,13 @@
 		}
 	},
 	"app": {
-		"title": "Markdown ビューア/エディタ"
+		"title": "Markdown ビューア/エディタ",
+		"loading": "読み込み中...",
+		"darkMode": "ダークモード",
+		"lightMode": "ライトモード",
+		"showPreview": "プレビューを表示",
+		"showEditor": "エディタを表示",
+		"showSideBySide": "並べて表示",
+		"hidePreview": "プレビューを非表示"
 	}
 }

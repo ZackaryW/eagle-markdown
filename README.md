@@ -2,15 +2,15 @@
 
 A markdown extension for [Eagle](https://eagle.cool/) that provides a clean Markdown editor with theme support.
 
-![Light Theme](docs-asset/light.png)
-![Dark Theme](docs-asset/dark.png)
-
 ## Features
 
 - 📝 Markdown editing support
 - 👁️ Preview mode
 - 🌓 Light/Dark theme support
 - ⚡ Simple and fast
+- 📚 Local library wikilinks support
+- 🪜 Multi-level list indentation
+- 🎨 Enhanced visual toggles with persisted settings
 
 ## Installation
 
@@ -22,12 +22,20 @@ A markdown extension for [Eagle](https://eagle.cool/) that provides a clean Mark
 
 The editor supports standard markdown syntax and includes a toolbar for common formatting options. Use the theme toggle button (🌓) to switch between light and dark themes.
 
+Use the editor's new features:
+
+- Type `[[Page Name]]` to create links to items in your local library.
+- Indent list items across multiple levels for nested lists.
+- Visual toggle preferences (theme and other settings) are now saved between sessions.
+
 ## Acknowledgements
 
-This plugin is built with:
-* [SimpleMDE](https://github.com/sparksuite/simplemde-markdown-editor) - A simple, beautiful, and embeddable JavaScript Markdown editor
+- React
+- Vite
+- markdown-it
+- markdown-it-task-lists
+- daisyUI
 
-* [Bootstrap Theme](https://github.com/CoffeePerry/simplemde-theme-bootstrap-dark) - A Bootstrap-inspired dark theme for SimpleMDE
 ## License
 
 MIT License

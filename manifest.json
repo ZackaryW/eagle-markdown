@@ -1,6 +1,6 @@
 {
     "id": "60ee0b0e-cd56-11ef-9cd2-0242ac120002",
-    "version": "0.9.0",
+    "version": "1.0.0",
     "platform": "all",
     "arch": "all",
     "name": "{{manifest.app.name}}",
@@ -14,7 +14,7 @@
     "preview": {
         "md": {
             "viewer": {
-                "path": "viewer/md.html"
+                "path": "dist/index.html"
             }
         }
     }
