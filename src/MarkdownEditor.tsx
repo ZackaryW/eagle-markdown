@@ -8,6 +8,7 @@ interface MarkdownEditorProps {
   onChange?: (value: string) => void;
   onBlur?: () => void | Promise<void>;
   showPreview?: boolean;
+  fontSize?: number;
 }
 
 // Configure MarkdownIt with common options
@@ -110,7 +111,7 @@ function prepend(text: string, sel: [number, number], prefix: string) {
   return lines.join("\n");
 }
 
-const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ initialValue = "", onChange, onBlur, showPreview = true }) => {
+const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ initialValue = "", onChange, onBlur, showPreview = true, fontSize }) => {
   const [value, setValue] = useState(initialValue);
   const [preview, setPreview] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -316,6 +317,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ initialValue = "", onCh
             <textarea
               ref={textareaRef}
               className="textarea textarea-bordered w-1/2 h-full bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 resize-none"
+              style={fontSize ? { fontSize: `${fontSize}px` } : undefined}
               value={value}
               onKeyDown={handleKeyDown}
               onInput={handleInput}
@@ -331,6 +333,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ initialValue = "", onCh
           <textarea
             ref={textareaRef}
             className="textarea textarea-bordered w-full h-full bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 resize-none"
+            style={fontSize ? { fontSize: `${fontSize}px` } : undefined}
             value={value}
             onKeyDown={handleKeyDown}
             onInput={handleInput}

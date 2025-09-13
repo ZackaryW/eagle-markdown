@@ -168,6 +168,18 @@ export const loadViewPreference = (): "editor" | "preview" => {
 export const saveViewPreference = (view: "editor" | "preview") => {
   localStorage.setItem("view", view);
 };
+// Font size storage utilities
+// Load font size preference (in pixels) from localStorage, defaults to 16
+export const loadFontSizePreference = (): number => {
+  const saved = localStorage.getItem("fontSize");
+  const size = saved ? parseFloat(saved) : NaN;
+  return !isNaN(size) && size > 0 ? size : 16;
+};
+
+// Save font size preference (in pixels) to localStorage
+export const saveFontSizePreference = (size: number) => {
+  localStorage.setItem("fontSize", size.toString());
+};
 
 // Wikilink utilities
 export const handleWikilinkClick = async (wikilinkText: string) => {

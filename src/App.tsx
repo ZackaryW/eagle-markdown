@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import MarkdownEditor from "./MarkdownEditor";
 import {
@@ -13,7 +10,9 @@ import {
   loadViewPreference,
   saveViewPreference,
   handleWikilinkClick,
-  applyTheme
+  applyTheme,
+  loadFontSizePreference,
+  saveFontSizePreference
 } from "./utils";
 
 // Create MarkdownIt instance using utility
@@ -26,6 +25,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState<'editor' | 'preview'>('editor');
   const [showSideBySide, setShowSideBySide] = useState(false);
+  // Font size preference
+  const [fontSize, setFontSize] = useState<number>(() => loadFontSizePreference());
 
   // Simulate Eagle API for theme and file loading
   useEffect(() => {
@@ -68,6 +69,11 @@ function App() {
       setIsLoading(false);
     }
   }, []);
+
+  // Apply and save font size preference
+  useEffect(() => {
+    saveFontSizePreference(fontSize);
+  }, [fontSize]);
 
   // Handle plugin exit to save current content
   useEffect(() => {
@@ -145,9 +151,32 @@ function App() {
   };
 
   return (
-    <div className="w-full h-screen p-4 bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300 flex flex-col">
+    <div
+      className="w-full h-screen p-4 bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-300 flex flex-col"
+    >
       <div className="flex justify-between items-center mb-4 flex-shrink-0">
         <div className="flex gap-2">
+          {/* Font size controls */}
+          <button
+            className="btn btn-sm btn-outline"
+            title="Decrease font size"
+            onClick={() => setFontSize((s) => Math.max(10, s - 1))}
+          >-
+          </button>
+          {/* Font size toggle */}
+          <button
+            className="btn btn-sm btn-outline"
+            onClick={() => setFontSize(fontSize === 16 ? 20 : 16)}
+          >
+            {`Font ${fontSize}px`}
+          </button>
+          <button
+            className="btn btn-sm btn-outline"
+            title="Increase font size"
+            onClick={() => setFontSize((s) => s + 1)}
+          >+
+          </button>
+          {/* Theme toggle */}
           <button
             className="btn btn-sm btn-outline"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
@@ -171,10 +200,11 @@ function App() {
               {showSideBySide ? (window.i18next?.t('app.hidePreview') || 'Hide Preview') : (window.i18next?.t('app.showSideBySide') || 'Show Side-by-Side')}
             </button>
           )}
+          
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden">
+  <div className="flex-1 overflow-hidden" style={{ fontSize: `${fontSize}px` }}>
         {isLoading ? (
           <div className="w-full h-full flex items-center justify-center">
             <p className="text-black dark:text-white">
@@ -189,6 +219,7 @@ function App() {
               onChange={handleChange}
               onBlur={handleEditorBlur}
               showPreview={showSideBySide}
+              fontSize={fontSize}
             />
           </div>
         ) : (
