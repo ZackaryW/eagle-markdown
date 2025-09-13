@@ -5,6 +5,13 @@
 		}
 	},
 	"app": {
-		"title": "Просмотрщик/Редактор Markdown"
+		"title": "Просмотрщик/Редактор Markdown",
+		"loading": "Загрузка...",
+		"darkMode": "Тёмный режим",
+		"lightMode": "Светлый режим",
+		"showPreview": "Показать предпросмотр",
+		"showEditor": "Показать редактор",
+		"showSideBySide": "Показать рядом",
+		"hidePreview": "Скрыть предпросмотр"
 	}
 }

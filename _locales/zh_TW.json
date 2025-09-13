@@ -5,5 +5,13 @@
 		}
 	},
 	"app": {
-		"title": "Markdown 檢視/編輯器"	}
+		"title": "Markdown 檢視/編輯器",
+		"loading": "載入中...",
+		"darkMode": "深色模式",
+		"lightMode": "淺色模式",
+		"showPreview": "顯示預覽",
+		"showEditor": "顯示編輯器",
+		"showSideBySide": "並排顯示",
+		"hidePreview": "隱藏預覽"
+	}
 }

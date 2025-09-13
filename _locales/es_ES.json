@@ -5,6 +5,13 @@
 		}
 	},
 	"app": {
-		"title": "Visor/Editor de Markdown"
+		"title": "Visor/Editor de Markdown",
+		"loading": "Cargando...",
+		"darkMode": "Modo Oscuro",
+		"lightMode": "Modo Claro",
+		"showPreview": "Mostrar Vista Previa",
+		"showEditor": "Mostrar Editor",
+		"showSideBySide": "Mostrar Lado a Lado",
+		"hidePreview": "Ocultar Vista Previa"
 	}
 }
