@@ -1,5 +1,5 @@
 {
-    "source" : "https://github.com/eagle-cooler/template.git",
+    "source" : "https://github.com/ZackaryW/eagle-plugin-template.git",
     "branch" : "main",
     "allowCron" : true
 }
